@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import PageTransition from '../components/PagiTransition';
 import { motion } from 'framer-motion';
@@ -8,14 +8,23 @@ import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 
 const AccountSettings = () => {
   const navigate = useNavigate();
-  const [userData] = useState({
-    fullName: 'Marry Doe',
-    email: 'Marry@Gmail.Com',
-    bio: 'Lorem Ipsum Dolor Sit Amet, Consetetur Sadipscing Elitr, Sed Diam Nonumy Eirmod Tempor Invidunt Ut Labore Et Dolore Magna Aliquyam Erat, Sed Diam',
-    mobile: '1234567890',
-    companyName: 'Acme Inc.',
-    isAgency: 'yes'
+
+
+  const [userData, setUserData] = useState({
+    fullName: '',
+    email: '',
+    mobile: '',
+    companyName: '',
+    isAgency: 'no'
   });
+
+  useEffect(() => {
+    // Load user data from localStorage
+    const storedData = localStorage.getItem('userData');
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
+    }
+  }, []);
 
   return (
     <PageTransition className="min-h-screen bg-gray-50">

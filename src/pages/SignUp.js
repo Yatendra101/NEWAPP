@@ -57,6 +57,9 @@ const SignUp = () => {
     
     // If no errors, proceed with signup
     if (Object.values(newErrors).every(error => !error)) {
+
+      // Save user data to localStorage
+    localStorage.setItem('userData', JSON.stringify(formData));
       // For demo, just navigate to account page
       navigate('/account');
     }
